@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductCard = ({ image, status, name, description, price }) => {
+export function ProductCard ({ image, status, name, description, price })  {
   return (
     <div style={{padding: "16px", width: "256px", position: "relative", backgroundColor: "white",}}>
       {status && (
@@ -18,4 +18,3 @@ const ProductCard = ({ image, status, name, description, price }) => {
   );
 };
 
-export default ProductCard;

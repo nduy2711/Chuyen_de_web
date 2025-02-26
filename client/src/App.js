@@ -1,6 +1,13 @@
 import React from "react";
 import { necklaces } from "./necklaces";
-import { BrowserRouter as Router, Routes, Route, Link, useParams } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
+import ManageList from "./components/ManageList";
 
 export default function App() {
   return (
@@ -9,7 +16,7 @@ export default function App() {
       <Routes>
         <Route path="/necklace-list" element={<NecklaceList />} />
         <Route path="/necklace/:id" element={<NecklaceDetail />} />
-
+        <Route path="/necklace-update" element={<ManageList />} />
       </Routes>
     </Router>
   );
@@ -18,13 +25,27 @@ export default function App() {
 function Navbar() {
   return (
     <nav>
-      <Link to="/"><button>Home</button></Link>
-      <Link to="/necklace-list"><button>List</button></Link>
-      <Link to="/necklace-search"><button>Search</button></Link>
-      <Link to="/necklace-filter"><button>Filter</button></Link>
-      <Link to="/necklace-add"><button>Add</button></Link>
-      <Link to="/necklace-update"><button>Update</button></Link>
-      <Link to="/necklace-delete"><button>Delete</button></Link>
+      <Link to="/">
+        <button>Home</button>
+      </Link>
+      <Link to="/necklace-list">
+        <button>List</button>
+      </Link>
+      <Link to="/necklace-search">
+        <button>Search</button>
+      </Link>
+      <Link to="/necklace-filter">
+        <button>Filter</button>
+      </Link>
+      <Link to="/necklace-add">
+        <button>Add</button>
+      </Link>
+      <Link to="/necklace-update">
+        <button>Update</button>
+      </Link>
+      <Link to="/necklace-delete">
+        <button>Delete</button>
+      </Link>
     </nav>
   );
 }
@@ -52,9 +73,15 @@ function NecklaceDetail() {
     <div>
       <h2>{necklace.name}</h2>
       <img src={`/assets/${necklace.image}`} alt={necklace.name} width="100" />
-      <p><strong>Price:</strong> ${necklace.price}</p>
-      <p><strong>Status:</strong> {necklace.status}</p>
-      <p><strong>Description:</strong> {necklace.description}</p>
+      <p>
+        <strong>Price:</strong> ${necklace.price}
+      </p>
+      <p>
+        <strong>Status:</strong> {necklace.status}
+      </p>
+      <p>
+        <strong>Description:</strong> {necklace.description}
+      </p>
     </div>
   ) : (
     <h2>Necklace not found</h2>

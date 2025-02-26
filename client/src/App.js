@@ -8,6 +8,7 @@ import {
   useParams,
 } from "react-router-dom";
 import ManageList from "./components/ManageList";
+import FilterList from "./components/FilterList";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/necklace-list" element={<NecklaceList />} />
         <Route path="/necklace/:id" element={<NecklaceDetail />} />
         <Route path="/necklace-update" element={<ManageList />} />
+        <Route path="/necklace-filter" element={<FilterList />} />
       </Routes>
     </Router>
   );

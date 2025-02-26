@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { necklaces as initialNecklaces } from "../necklaces"; // Import danh sách gốc
+import { necklaces as initialNecklaces } from "../necklaces";
 
 function ManageList() {
-  const [necklacesList, setNecklacesList] = useState(initialNecklaces); // Lưu danh sách vào state
+  const [necklacesList, setNecklacesList] = useState(initialNecklaces);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [formData, setFormData] = useState({
     id: "",

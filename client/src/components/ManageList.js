@@ -36,13 +36,20 @@ function ManageList() {
     }
   };
 
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm(`Bạn có chắc muốn xóa sản phẩm mang mã hiệu ${id}?`);
+    if (confirmDelete) {
+      setNecklacesList(necklacesList.filter(necklace => necklace.id !== id));
+    }
+  };
+
   return (
     <>
       <div className="grid-container">
         {necklacesList.map((necklace) => (
           <div key={necklace.id} className="product-card">
             Name: {necklace.name}
-            <button>Delete</button>
+            <button onClick={() => handleDelete(necklace.id)}>Delete</button>
             <button onClick={() => handleUpdateClick(necklace)}>Update</button>
           </div>
         ))}

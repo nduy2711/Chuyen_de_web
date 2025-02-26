@@ -9,7 +9,7 @@ export function NecklaceDetail() {
         <div>
             <h2>{necklace.name}</h2>
             <p><strong>ID:</strong> {necklace.id}</p>
-            <img src={`/assets/${necklace.image}`} alt={necklace.name} width="100" />
+            <img src={`${necklace.image}`} alt={necklace.name} width="100" />
             <p><strong>Price:</strong> ${necklace.price}</p>
             <p><strong>Status:</strong> {necklace.status}</p>
             <p><strong>Description:</strong> {necklace.description}</p>

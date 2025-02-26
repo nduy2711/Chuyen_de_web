@@ -2,7 +2,7 @@ export const necklaces = [
   {
     id: "NL001",
     name: "Elegant Pearl Necklace",
-    image: "/assets/necklace01.jpg", // Không cần import, chỉ dùng đường dẫn
+    image: "/assets/necklace01.jpg",
     status: "available",
     price: 120.99,
     description: "A classic pearl necklace that adds elegance to any outfit.",

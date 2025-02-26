@@ -1,6 +1,12 @@
 import React from "react";
 import { necklaces } from "./necklaces";
-import { BrowserRouter as Router, Routes, Route, Link, useParams } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
 import { Search } from "./components/Search";
 import ManageList from "./components/ManageList";
 import FilterList from "./components/FilterList";
@@ -13,11 +19,9 @@ export default function App() {
         <Route path="/necklace-list" element={<NecklaceList />} />
         <Route path="/necklace/:id" element={<NecklaceDetail />} />
         <Route path="/necklace-update" element={<ManageList />} />
-<<<<<<< HEAD
-        <Route path="/necklace-filter" element={<FilterList />} />
-=======
+        <Route path="/necklace-delete" element={<ManageList />} />
         <Route path="/necklace-search" element={<Search />} />
->>>>>>> a375f47dc8cb2e9392077473767719cf914fa634
+        <Route path="/necklace-filter" element={<FilterList />} />
       </Routes>
     </Router>
   );

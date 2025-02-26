@@ -1,6 +1,7 @@
 import React from "react";
 import { necklaces } from "./necklaces";
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from "react-router-dom";
+import { Search } from "./components/Search";
 
 export default function App() {
   return (
@@ -9,7 +10,7 @@ export default function App() {
       <Routes>
         <Route path="/necklace-list" element={<NecklaceList />} />
         <Route path="/necklace/:id" element={<NecklaceDetail />} />
-
+        <Route path="/necklace-search" element={<Search />} />
       </Routes>
     </Router>
   );

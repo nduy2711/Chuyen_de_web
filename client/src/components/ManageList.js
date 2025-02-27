@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { necklaces as initialNecklaces } from "../necklaces";
+import { necklaces } from "../necklaces";
 
 function ManageList() {
-  const [necklacesList, setNecklacesList] = useState(initialNecklaces);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [formData, setFormData] = useState({
     id: "",
@@ -18,35 +17,29 @@ function ManageList() {
     setFormData(necklace);
   };
 
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   const handleSave = () => {
     const confirmSave = window.confirm(
       "Bạn có muốn lưu thông tin đã cập nhật không?"
     );
     if (confirmSave) {
-      setNecklacesList(
-        necklacesList.map((item) =>
-          item.id === formData.id ? { ...formData } : item
-        )
-      );
+      alert("Đã lưu thông tin sản phẩm");
       setSelectedProduct(null);
     }
   };
 
   const handleDelete = (id) => {
-    const confirmDelete = window.confirm(`Bạn có chắc muốn xóa sản phẩm mang mã hiệu ${id}?`);
+    const confirmDelete = window.confirm(
+      `Bạn có chắc muốn xóa sản phẩm mang mã hiệu ${id}?`
+    );
     if (confirmDelete) {
-      setNecklacesList(necklacesList.filter(necklace => necklace.id !== id));
+      // setNecklacesList(necklacesList.filter((necklace) => necklace.id !== id));
     }
   };
 
   return (
     <>
       <div className="grid-container">
-        {necklacesList.map((necklace) => (
+        {necklaces.map((necklace) => (
           <div key={necklace.id} className="product-card">
             Name: {necklace.name}
             <button onClick={() => handleDelete(necklace.id)}>Delete</button>
@@ -58,40 +51,55 @@ function ManageList() {
       {selectedProduct && (
         <div className="update-form">
           <h2>Update Product</h2>
-          <input type="text" name="id" value={formData.id} readOnly />
+          <img
+            src={formData.image}
+            alt={formData.name}
+            style={{ width: "100px", height: "100px", objectFit: "cover" }}
+          />
+          <input type="file" name="image" />
+          <input
+            type="text"
+            name="id"
+            value={formData.id}
+            readOnly
+            style={{
+              backgroundColor: "#f0f0f0",
+              color: "#808080",
+              cursor: "not-allowed",
+            }}
+          />
           <input
             type="text"
             name="name"
             value={formData.name}
-            onChange={handleInputChange}
-            placeholder="Product Name"
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
-          <input
-            type="text"
-            name="image"
-            value={formData.image}
-            onChange={handleInputChange}
-            placeholder="Image URL"
-          />
-          <input
-            type="text"
+          <select
             name="status"
             value={formData.status}
-            onChange={handleInputChange}
-            placeholder="Status"
-          />
+            onChange={(e) =>
+              setFormData({ ...formData, status: e.target.value })
+            }
+          >
+            <option value="available">Available</option>
+            <option value="out of stock">Out of Stock</option>
+          </select>
           <input
             type="number"
             name="price"
             value={formData.price}
-            onChange={handleInputChange}
             placeholder="Price"
+            onChange={(e) =>
+              setFormData({ ...formData, price: e.target.value })
+            }
           />
           <textarea
             name="description"
             value={formData.description}
-            onChange={handleInputChange}
             placeholder="Description"
+            onChange={(e) =>
+              setFormData({ ...formData, description: e.target.value })
+            }
           />
           <button onClick={handleSave}>Save</button>
           <button onClick={() => setSelectedProduct(null)}>Cancel</button>

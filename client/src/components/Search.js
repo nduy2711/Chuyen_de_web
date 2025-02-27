@@ -11,7 +11,7 @@ export function Search() {
     return (
       <div>
         <h1>Search</h1>
-        <input type="text" placeholder="Tìm kiếm theo tên" />
+        <input type="text" placeholder="Enter product's name..." />
         <button onClick={handleSearch}>Search</button>
         <ul>
           {results.map((necklace) => (

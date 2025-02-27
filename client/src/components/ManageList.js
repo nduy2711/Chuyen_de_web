@@ -19,20 +19,20 @@ function ManageList() {
 
   const handleSave = () => {
     const confirmSave = window.confirm(
-      "Bạn có muốn lưu thông tin đã cập nhật không?"
+      "Do you want to save the updated information?"
     );
     if (confirmSave) {
-      alert("Đã lưu thông tin sản phẩm");
+      alert("Updated successfully!");
       setSelectedProduct(null);
     }
   };
 
   const handleDelete = (id) => {
     const confirmDelete = window.confirm(
-      `Bạn có chắc muốn xóa sản phẩm mang mã hiệu ${id}?`
+      `Are you sure you want to delete the product id: ${id}?`
     );
     if (confirmDelete) {
-      alert(`Đã xóa sản phẩm ${id} thành công!`);
+      alert(`Deleted successfully product id: ${id}!`);
     }
   };
 

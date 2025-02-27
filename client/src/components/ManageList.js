@@ -32,7 +32,7 @@ function ManageList() {
       `Bạn có chắc muốn xóa sản phẩm mang mã hiệu ${id}?`
     );
     if (confirmDelete) {
-      // setNecklacesList(necklacesList.filter((necklace) => necklace.id !== id));
+      alert(`Đã xóa sản phẩm ${id} thành công!`);
     }
   };
 

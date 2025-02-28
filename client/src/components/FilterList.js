@@ -4,9 +4,13 @@ import { necklaces } from "../necklaces";
 function FilterList() {
   const [filter, setFilter] = useState("all");
 
-  const filteredNecklaces = necklaces.filter(
-    (item) => filter === "all" || item.status === filter
-  );
+  const filteredNecklaces = necklaces.filter((necklace) => {
+    if (filter === "all") {
+      return true;
+    } else {
+      return necklace.status === filter;
+    }
+  });
 
   return (
     <div>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { necklaces } from "../necklaces";
 
 function ManageList() {
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(false);
   const [formData, setFormData] = useState({
     id: "",
     name: "",
@@ -13,7 +13,7 @@ function ManageList() {
   });
 
   const handleUpdateClick = (necklace) => {
-    setSelectedProduct(necklace);
+    setSelectedProduct(true);
     setFormData(necklace);
   };
 
@@ -59,7 +59,6 @@ function ManageList() {
           <input type="file" name="image" />
           <input
             type="text"
-            name="id"
             value={formData.id}
             readOnly
             style={{
@@ -70,12 +69,10 @@ function ManageList() {
           />
           <input
             type="text"
-            name="name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
           <select
-            name="status"
             value={formData.status}
             onChange={(e) =>
               setFormData({ ...formData, status: e.target.value })
@@ -86,7 +83,6 @@ function ManageList() {
           </select>
           <input
             type="number"
-            name="price"
             value={formData.price}
             placeholder="Price"
             onChange={(e) =>
@@ -94,7 +90,6 @@ function ManageList() {
             }
           />
           <textarea
-            name="description"
             value={formData.description}
             placeholder="Description"
             onChange={(e) =>

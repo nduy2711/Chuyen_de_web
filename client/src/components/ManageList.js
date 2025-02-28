@@ -23,7 +23,7 @@ function ManageList() {
     );
     if (confirmSave) {
       alert("Updated successfully!");
-      setSelectedProduct(null);
+      setSelectedProduct(false);
     }
   };
 

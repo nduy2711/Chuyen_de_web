@@ -1,8 +1,16 @@
 import { useState } from "react";
 import { necklaces } from "../necklaces";
+import { Button } from "react-bootstrap";
+import Table from "react-bootstrap/Table";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
 
 function ManageList() {
   const [selectedProduct, setSelectedProduct] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const [formData, setFormData] = useState({
     id: "",
     name: "",
@@ -14,6 +22,7 @@ function ManageList() {
 
   const handleUpdateClick = (necklace) => {
     setSelectedProduct(true);
+    handleShow();
     setFormData(necklace);
   };
 
@@ -39,66 +48,120 @@ function ManageList() {
   return (
     <>
       <div className="grid-container">
-        {necklaces.map((necklace) => (
-          <div key={necklace.id} className="product-card">
-            Name: {necklace.name}
-            <button onClick={() => handleDelete(necklace.id)}>Delete</button>
-            <button onClick={() => handleUpdateClick(necklace)}>Update</button>
-          </div>
-        ))}
+        <Table
+          className="small-table"
+          striped
+          bordered
+          hover
+          style={{ width: "90%", margin: "40px" }}
+        >
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {necklaces.map((necklace) => (
+              <tr key={necklace.id}>
+                <td>{necklace.id}</td>
+                <td>{necklace.name}</td>
+                <td>
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => handleDelete(necklace.id)}
+                  >
+                    Delete
+                  </Button>{" "}
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => handleUpdateClick(necklace)}
+                  >
+                    Update
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       </div>
 
       {selectedProduct && (
-        <div className="update-form">
-          <h2>Update Product</h2>
-          <img
-            src={formData.image}
-            alt={formData.name}
-            style={{ width: "100px", height: "100px", objectFit: "cover" }}
-          />
-          <input type="file" name="image" />
-          <input
-            type="text"
-            value={formData.id}
-            readOnly
-            style={{
-              backgroundColor: "#f0f0f0",
-              color: "#808080",
-              cursor: "not-allowed",
-            }}
-          />
-          <input
-            type="text"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-          <select
-            value={formData.status}
-            onChange={(e) =>
-              setFormData({ ...formData, status: e.target.value })
-            }
-          >
-            <option value="available">Available</option>
-            <option value="out of stock">Out of Stock</option>
-          </select>
-          <input
-            type="number"
-            value={formData.price}
-            placeholder="Price"
-            onChange={(e) =>
-              setFormData({ ...formData, price: e.target.value })
-            }
-          />
-          <textarea
-            value={formData.description}
-            placeholder="Description"
-            onChange={(e) =>
-              setFormData({ ...formData, description: e.target.value })
-            }
-          />
-          <button onClick={handleSave}>Save</button>
-          <button onClick={() => setSelectedProduct(null)}>Cancel</button>
-        </div>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Update Necklace</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group className="mb-3">
+                <Form.Label>ID</Form.Label>
+                <Form.Control value={formData.id} disabled />
+              </Form.Group>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+              />
+              <Form.Label>Price</Form.Label>
+              <Form.Control
+                value={formData.price}
+                onChange={(e) =>
+                  setFormData({ ...formData, price: e.target.value })
+                }
+              />
+              <Form.Label htmlFor="disabledSelect">Status</Form.Label>
+              <Form.Select
+                value={formData.status}
+                onChange={(e) =>
+                  setFormData({ ...formData, status: e.target.value })
+                }
+              >
+                <option>available</option>
+                <option>out of stock</option>
+              </Form.Select>
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                value={formData.description}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
+              />
+              <br />
+              <img
+                src={formData.image}
+                style={{ width: "100px", margin: "20px 0px" }}
+              />
+              <div>
+                <input
+                  id="labelUpload"
+                  type="file"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      setFormData({
+                        ...formData,
+                        image: URL.createObjectURL(file),
+                      });
+                    }
+                  }}
+                />
+              </div>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleSave}>
+              Save
+            </Button>
+          </Modal.Footer>
+        </Modal>
       )}
     </>
   );

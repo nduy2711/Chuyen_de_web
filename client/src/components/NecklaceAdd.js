@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { necklaces } from "../necklaces";
 
-export default function NecklaceAdd() {
+export function NecklaceAdd() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [status, setStatus] = useState("available");

@@ -1,9 +1,9 @@
+// App.js
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import { NecklaceList } from "./components/NeklaceList";
+import { NecklaceList } from "./components/NecklaceList";
 import { NecklaceDetail } from "./components/NecklaceDetail";
 import NecklaceAdd from "./components/NecklaceAdd";
 import { Search } from "./components/Search";
@@ -16,6 +16,7 @@ export default function App() {
       <CustomNavbar />
       <Container className="mt-4">
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/necklace-list" element={<NecklaceList />} />
           <Route path="/necklace/:id" element={<NecklaceDetail />} />
           <Route path="/necklace-add" element={<NecklaceAdd />} />
@@ -30,6 +31,9 @@ export default function App() {
 }
 
 function CustomNavbar() {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>

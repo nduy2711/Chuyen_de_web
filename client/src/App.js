@@ -3,7 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { NecklaceList } from "./components/NeklaceList";
+import { NecklaceList } from "./components/NecklaceList";
 import { NecklaceDetail } from "./components/NecklaceDetail";
 import { NecklaceAdd } from "./components/NecklaceAdd";
 import { Search } from "./components/Search";

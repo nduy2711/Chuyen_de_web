@@ -2,7 +2,7 @@ export const necklaces = [
   {
     id: "NL001",
     name: "Elegant Pearl Necklace",
-    image: "/assets/necklace01.jpg",
+    image: "/images/necklace01.jpg",
     status: "available",
     price: 120.99,
     description: "A classic pearl necklace that adds elegance to any outfit.",
@@ -10,7 +10,7 @@ export const necklaces = [
   {
     id: "NL002",
     name: "Gold Chain Necklace",
-    image: "/assets/necklace02.jpg",
+    image: "/images/necklace02.jpg",
     status: "out of stock",
     price: 150.5,
     description: "A premium 18K gold chain, perfect for everyday wear.",
@@ -18,7 +18,7 @@ export const necklaces = [
   {
     id: "NL003",
     name: "Silver Heart Pendant",
-    image: "/assets/necklace03.jpg",
+    image: "/images/necklace03.jpg",
     status: "available",
     price: 75.0,
     description: "A beautiful silver necklace with a heart-shaped pendant.",
@@ -26,7 +26,7 @@ export const necklaces = [
   {
     id: "NL004",
     name: "Crystal Choker Necklace",
-    image: "/assets/necklace04.jpg",
+    image: "/images/necklace04.jpg",
     status: "available",
     price: 89.99,
     description: "A stunning crystal choker that shines in the light.",
@@ -34,7 +34,7 @@ export const necklaces = [
   {
     id: "NL005",
     name: "Diamond Infinity Necklace",
-    image: "/assets/necklace05.jpg",
+    image: "/images/necklace05.jpg",
     status: "available",
     price: 250.0,
     description: "An elegant infinity-shaped pendant with sparkling diamonds.",
@@ -42,7 +42,7 @@ export const necklaces = [
   {
     id: "NL006",
     name: "Rose Gold Layered Necklace",
-    image: "/assets/necklace06.jpg",
+    image: "/images/necklace06.jpg",
     status: "available",
     price: 110.75,
     description: "A trendy layered necklace in rose gold for a stylish look.",
@@ -50,7 +50,7 @@ export const necklaces = [
   {
     id: "NL007",
     name: "Vintage Locket Necklace",
-    image: "/assets/necklace07.jpg",
+    image: "/images/necklace07.jpg",
     status: "out of stock",
     price: 130.0,
     description:
@@ -59,7 +59,7 @@ export const necklaces = [
   {
     id: "NL008",
     name: "Minimalist Bar Necklace",
-    image: "/assets/necklace08.jpg",
+    image: "/images/necklace08.jpg",
     status: "available",
     price: 60.99,
     description: "A sleek and simple bar necklace for a modern touch.",
@@ -67,7 +67,7 @@ export const necklaces = [
   {
     id: "NL009",
     name: "Bohemian Beaded Necklace",
-    image: "/assets/necklace09.jpg",
+    image: "/images/necklace09.jpg",
     status: "available",
     price: 45.5,
     description: "A colorful bohemian necklace with intricate beadwork.",
@@ -75,7 +75,7 @@ export const necklaces = [
   {
     id: "NL010",
     name: "Moon & Star Pendant Necklace",
-    image: "/assets/necklace10.jpg",
+    image: "/images/necklace10.jpg",
     status: "available",
     price: 85.0,
     description:
@@ -84,7 +84,7 @@ export const necklaces = [
   {
     id: "NL011",
     name: "Golden Elegance",
-    image: "/assets/necklace11.jpg",
+    image: "/images/necklace11.jpg",
     status: "available",
     price: 120.99,
     description: "A stunning gold-plated necklace with intricate detailing.",
@@ -92,7 +92,7 @@ export const necklaces = [
   {
     id: "NL012",
     name: "Silver Serenity",
-    image: "/assets/necklace12.jpg",
+    image: "/images/necklace12.jpg",
     status: "out of stock",
     price: 85.5,
     description: "Elegant silver necklace with a minimalist charm.",
@@ -100,7 +100,7 @@ export const necklaces = [
   {
     id: "NL013",
     name: "Pearl Grace",
-    image: "/assets/necklace13.jpg",
+    image: "/images/necklace13.jpg",
     status: "available",
     price: 150.0,
     description: "Classic pearl necklace for timeless beauty.",
@@ -108,7 +108,7 @@ export const necklaces = [
   {
     id: "NL014",
     name: "Ruby Radiance",
-    image: "/assets/necklace14.jpg",
+    image: "/images/necklace14.jpg",
     status: "available",
     price: 230.75,
     description: "A luxurious ruby-embedded necklace for a royal look.",
@@ -116,7 +116,7 @@ export const necklaces = [
   {
     id: "NL015",
     name: "Emerald Essence",
-    image: "/assets/necklace15.jpg",
+    image: "/images/necklace15.jpg",
     status: "available",
     price: 199.99,
     description: "An emerald gemstone necklace exuding sophistication.",
@@ -124,7 +124,7 @@ export const necklaces = [
   {
     id: "NL016",
     name: "Sapphire Sparkle",
-    image: "/assets/necklace16.jpg",
+    image: "/images/necklace16.jpg",
     status: "available",
     price: 215.5,
     description: "A dazzling sapphire-adorned necklace with a radiant glow.",
@@ -132,7 +132,7 @@ export const necklaces = [
   {
     id: "NL017",
     name: "Diamond Delight",
-    image: "/assets/necklace17.jpg",
+    image: "/images/necklace17.jpg",
     status: "out of stock",
     price: 350.0,
     description: "Exquisite diamond necklace for an elegant touch.",
@@ -140,7 +140,7 @@ export const necklaces = [
   {
     id: "NL018",
     name: "Rose Gold Charm",
-    image: "/assets/necklace18.jpg",
+    image: "/images/necklace18.jpg",
     status: "available",
     price: 99.99,
     description: "A delicate rose gold necklace with a heart pendant.",
@@ -148,7 +148,7 @@ export const necklaces = [
   {
     id: "NL019",
     name: "Crystal Bloom",
-    image: "/assets/necklace19.jpg",
+    image: "/images/necklace19.jpg",
     status: "available",
     price: 75.0,
     description: "A crystal-embedded floral necklace for a chic style.",
@@ -156,9 +156,89 @@ export const necklaces = [
   {
     id: "NL020",
     name: "Amethyst Aura",
-    image: "/assets/necklace20.jpg",
+    image: "/images/necklace20.jpg",
     status: "available",
     price: 180.25,
     description: "An enchanting amethyst stone necklace for a mystical appeal.",
+  },
+  {
+    id: "NL021",
+    name: "Platinum Shine Necklace",
+    image: "/images/necklace21.jpg",
+    status: "available",
+    price: 299.99,
+    description: "A premium platinum necklace with a sleek design.",
+  },
+  {
+    id: "NL022",
+    name: "Black Onyx Pendant",
+    image: "/images/necklace22.jpg",
+    status: "available",
+    price: 99.5,
+    description: "A mysterious black onyx pendant on a silver chain.",
+  },
+  {
+    id: "NL023",
+    name: "Opal Dream Necklace",
+    image: "/images/necklace23.jpg",
+    status: "out of stock",
+    price: 189.75,
+    description: "A mesmerizing opal gemstone necklace for a dreamy vibe.",
+  },
+  {
+    id: "NL024",
+    name: "Citrine Sunlight Necklace",
+    image: "/images/necklace24.jpg",
+    status: "available",
+    price: 165.0,
+    description: "A bright citrine stone necklace radiating warmth.",
+  },
+  {
+    id: "NL025",
+    name: "Turquoise Boho Necklace",
+    image: "/images/necklace25.jpg",
+    status: "available",
+    price: 78.5,
+    description: "A turquoise beaded necklace with bohemian charm.",
+  },
+  {
+    id: "NL026",
+    name: "Garnet Passion Necklace",
+    image: "/images/necklace26.jpg",
+    status: "available",
+    price: 140.0,
+    description: "A deep red garnet necklace symbolizing passion and energy.",
+  },
+  {
+    id: "NL027",
+    name: "Topaz Tranquility Necklace",
+    image: "/images/necklace27.jpg",
+    status: "available",
+    price: 190.0,
+    description: "A light blue topaz necklace promoting peace and calmness.",
+  },
+  {
+    id: "NL028",
+    name: "Amber Glow Necklace",
+    image: "/images/necklace28.jpg",
+    status: "available",
+    price: 135.5,
+    description: "A warm amber stone necklace exuding natural beauty.",
+  },
+  {
+    id: "NL029",
+    name: "Aquamarine Ocean Necklace",
+    image: "/images/necklace29.jpg",
+    status: "out of stock",
+    price: 220.99,
+    description: "An aquamarine gemstone necklace inspired by ocean waves.",
+  },
+  {
+    id: "NL030",
+    name: "Lapis Lazuli Mystique",
+    image: "/images/necklace30.jpg",
+    status: "available",
+    price: 175.0,
+    description: "A lapis lazuli necklace bringing wisdom and strength.",
   },
 ];

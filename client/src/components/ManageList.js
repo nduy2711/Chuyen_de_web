@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { necklaces } from "../necklaces";
+import { Card, Button, Form, Modal, Container, Row, Col } from "react-bootstrap";
 
 function ManageList() {
-  const [selectedProduct, setSelectedProduct] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [formData, setFormData] = useState({
     id: "",
     name: "",
@@ -13,94 +14,129 @@ function ManageList() {
   });
 
   const handleUpdateClick = (necklace) => {
-    setSelectedProduct(true);
+    setSelectedProduct(necklace);
     setFormData(necklace);
   };
 
   const handleSave = () => {
-    const confirmSave = window.confirm(
-      "Do you want to save the updated information?"
-    );
-    if (confirmSave) {
+    if (window.confirm("Do you want to save the updated information?")) {
       alert("Updated successfully!");
-      setSelectedProduct(false);
+      setSelectedProduct(null);
     }
   };
 
   const handleDelete = (id) => {
-    const confirmDelete = window.confirm(
-      `Are you sure you want to delete the product id: ${id}?`
-    );
-    if (confirmDelete) {
-      alert(`Deleted successfully product id: ${id}!`);
+    if (window.confirm(`Are you sure you want to delete product ID: ${id}?`)) {
+      alert(`Deleted successfully product ID: ${id}!`);
     }
   };
 
   return (
-    <>
-      <div className="grid-container">
+    <Container>
+      <Row className="mt-4">
         {necklaces.map((necklace) => (
-          <div key={necklace.id} className="product-card">
-            Name: {necklace.name}
-            <button onClick={() => handleDelete(necklace.id)}>Delete</button>
-            <button onClick={() => handleUpdateClick(necklace)}>Update</button>
-          </div>
+          <Col md={4} key={necklace.id} className="mb-4">
+            <Card className="shadow">
+              <Card.Img
+                variant="top"
+                src={necklace.image}
+                alt={necklace.name}
+                style={{ height: "200px", objectFit: "cover" }}
+              />
+              <Card.Body>
+                <Card.Title>{necklace.name}</Card.Title>
+                <Card.Text>
+                  <strong>Status:</strong> {necklace.status} <br />
+                  <strong>Price:</strong> ${necklace.price}
+                </Card.Text>
+                <Button variant="danger" onClick={() => handleDelete(necklace.id)}>
+                  Delete
+                </Button>{" "}
+                <Button variant="warning" onClick={() => handleUpdateClick(necklace)}>
+                  Update
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
-      </div>
+      </Row>
 
+      {/* Modal để cập nhật sản phẩm */}
       {selectedProduct && (
-        <div className="update-form">
-          <h2>Update Product</h2>
-          <img
-            src={formData.image}
-            alt={formData.name}
-            style={{ width: "100px", height: "100px", objectFit: "cover" }}
-          />
-          <input type="file" name="image" />
-          <input
-            type="text"
-            value={formData.id}
-            readOnly
-            style={{
-              backgroundColor: "#f0f0f0",
-              color: "#808080",
-              cursor: "not-allowed",
-            }}
-          />
-          <input
-            type="text"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-          <select
-            value={formData.status}
-            onChange={(e) =>
-              setFormData({ ...formData, status: e.target.value })
-            }
-          >
-            <option value="available">Available</option>
-            <option value="out of stock">Out of Stock</option>
-          </select>
-          <input
-            type="number"
-            value={formData.price}
-            placeholder="Price"
-            onChange={(e) =>
-              setFormData({ ...formData, price: e.target.value })
-            }
-          />
-          <textarea
-            value={formData.description}
-            placeholder="Description"
-            onChange={(e) =>
-              setFormData({ ...formData, description: e.target.value })
-            }
-          />
-          <button onClick={handleSave}>Save</button>
-          <button onClick={() => setSelectedProduct(null)}>Cancel</button>
-        </div>
+        <Modal show={true} onHide={() => setSelectedProduct(null)} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Update Product</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group>
+                <Form.Label>Image</Form.Label>
+                <div>
+                  <img
+                    src={formData.image}
+                    alt={formData.name}
+                    style={{ width: "100px", height: "100px", objectFit: "cover", marginBottom: "10px" }}
+                  />
+                </div>
+                <Form.Control type="file" name="image" />
+              </Form.Group>
+
+              <Form.Group className="mt-3">
+                <Form.Label>ID</Form.Label>
+                <Form.Control type="text" value={formData.id} readOnly disabled />
+              </Form.Group>
+
+              <Form.Group className="mt-3">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                />
+              </Form.Group>
+
+              <Form.Group className="mt-3">
+                <Form.Label>Status</Form.Label>
+                <Form.Select
+                  value={formData.status}
+                  onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                >
+                  <option value="available">Available</option>
+                  <option value="out of stock">Out of Stock</option>
+                </Form.Select>
+              </Form.Group>
+
+              <Form.Group className="mt-3">
+                <Form.Label>Price</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={formData.price}
+                  onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                />
+              </Form.Group>
+
+              <Form.Group className="mt-3">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  value={formData.description}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setSelectedProduct(null)}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={handleSave}>
+              Save
+            </Button>
+          </Modal.Footer>
+        </Modal>
       )}
-    </>
+    </Container>
   );
 }
 

@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
 import { necklaces } from "../necklaces";
+import { Container, ListGroup } from "react-bootstrap";
 
 export function NecklaceList() {
     return (
-        <div>
-            <h2>Necklace List</h2>
-            <ul>
+        <Container>
+            <h2 className="text-center my-4">Necklace List</h2>
+            <ListGroup>
                 {necklaces.map((necklace) => (
-                    <li key={necklace.id}>
-                        <Link to={`/necklace/${necklace.id}`}>{necklace.name}</Link>
-                    </li>
+                    <ListGroup.Item key={necklace.id} action as={Link} to={`/necklace/${necklace.id}`}>
+                        {necklace.name}
+                    </ListGroup.Item>
                 ))}
-            </ul>
-        </div>
+            </ListGroup>
+        </Container>
     );
 }

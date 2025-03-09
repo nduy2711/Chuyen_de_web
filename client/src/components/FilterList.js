@@ -30,13 +30,14 @@ function FilterList() {
         bordered
         hover
         className="small-table"
-        style={{ fontSize: "16px", width: "90%", margin: "auto" }}
+        style={{ fontSize: "16px", width: "90%", margin: "auto" }} // đổi thành tailwind
       >
         <thead>
           <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Status</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -45,6 +46,9 @@ function FilterList() {
               <td>{necklace.id}</td>
               <td>{necklace.name}</td>
               <td>{necklace.status}</td>
+              <td>
+                <Button variant="danger">Delete</Button>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -1,6 +1,8 @@
-import React from 'react';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import AddProduct from './components/AddProduct';
+import AddProduct from "./components/AddProduct";
+import UpdateProduct from "./components/UpdateProduct";
 
 export default function App() {
   return (
@@ -8,6 +10,7 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/add-necklace" element={<AddProduct />} />
+        <Route path="/update-necklace" element={<UpdateProduct />} />
       </Routes>
     </Router>
   );
@@ -17,10 +20,18 @@ function Navbar() {
   return (
     <>
       <nav>
-        <Link to="/add-necklace" style={{ marginRight: "10px" }}>Add </Link>
-        <Link to="/update-necklace" style={{ marginRight: "10px" }}>Update </Link>
-        <Link to="/delete-necklace" style={{ marginRight: "10px" }}>Delete </Link>
-        <Link to="/login" style={{ marginRight: "10px" }}>Login </Link>
+        <Link to="/add-necklace" style={{ marginRight: "10px" }}>
+          Add{" "}
+        </Link>
+        <Link to="/update-necklace" style={{ marginRight: "10px" }}>
+          Update{" "}
+        </Link>
+        <Link to="/delete-necklace" style={{ marginRight: "10px" }}>
+          Delete{" "}
+        </Link>
+        <Link to="/login" style={{ marginRight: "10px" }}>
+          Login{" "}
+        </Link>
       </nav>
     </>
   );

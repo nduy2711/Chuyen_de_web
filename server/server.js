@@ -108,7 +108,6 @@ app.get('/api/product/all', async (req, res) => {
   }
 });
 
-// Route DELETE: Xóa sản phẩm theo id
 app.delete('/api/product/delete/:id', async (req, res) => {
   const { id } = req.params;
   console.log("ID nhận được từ frontend:", id);
@@ -125,6 +124,21 @@ app.delete('/api/product/delete/:id', async (req, res) => {
     res.status(500).json({ message: 'Lỗi server khi xóa sản phẩm.' });
   }
 });
+
+app.post('/api/product/search', async (req, res) => {
+  const keyword = req.body.keyword;
+  try {
+    const results = await Necklace.find({
+      name: { $regex: keyword, $options: 'i' }
+    });
+    res.json(results);
+  } catch (error) {
+    console.error("Lỗi server khi tìm kiếm:", error);
+    res.status(500).json({ error: 'Lỗi server khi tìm kiếm' });
+  }
+});
+
+
 
 
 app.listen(port, () => console.log(`Server đang chạy trên cổng ${port}!`));

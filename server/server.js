@@ -98,4 +98,33 @@ app.post("/api/product/add", upload.single("image"), async (req, res) => {
   }
 });
 
+app.get('/api/product/all', async (req, res) => {
+  try {
+    const products = await Necklace.find({});
+    res.json(products);
+  } catch (err) {
+    console.error("Lỗi khi lấy danh sách sản phẩm:", err);
+    res.status(500).json({ error: "Lỗi server khi lấy sản phẩm" });
+  }
+});
+
+// Route DELETE: Xóa sản phẩm theo id
+app.delete('/api/product/delete/:id', async (req, res) => {
+  const { id } = req.params;
+  console.log("ID nhận được từ frontend:", id);
+  try {
+    const deletedProduct = await Necklace.findOneAndDelete({ id });
+
+    if (!deletedProduct) {
+      return res.status(404).json({ message: 'Không tìm thấy sản phẩm để xóa.' });
+    }
+
+    res.status(200).json({ message: 'Đã xóa sản phẩm thành công.' });
+  } catch (error) {
+    console.error('Lỗi khi xóa sản phẩm:', error);
+    res.status(500).json({ message: 'Lỗi server khi xóa sản phẩm.' });
+  }
+});
+
+
 app.listen(port, () => console.log(`Server đang chạy trên cổng ${port}!`));

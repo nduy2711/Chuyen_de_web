@@ -72,33 +72,28 @@ app.get("/api/product/last-id", async (req, res) => {
   }
 });
 
-app.post(
-  "/api/product/add",
-  verifyToken,
-  upload.single("image"),
-  async (req, res) => {
-    try {
-      const { id, name, price, description, category } = req.body;
-      const imagePath = req.file ? `/uploads/images/${req.file.filename}` : "";
+app.post("/api/product/add", upload.single("image"), async (req, res) => {
+  try {
+    const { id, name, price, description, category } = req.body;
+    const imagePath = req.file ? `/uploads/images/${req.file.filename}` : "";
 
-      const newProduct = new Necklace({
-        id,
-        name,
-        price,
-        description,
-        category,
-        image: imagePath,
-        status: "available",
-      });
+    const newProduct = new Necklace({
+      id,
+      name,
+      price,
+      description,
+      category,
+      image: imagePath,
+      status: "available",
+    });
 
-      await newProduct.save();
-      res.status(201).json({ message: "Sản phẩm đã được thêm thành công!" });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Đã xảy ra lỗi khi thêm sản phẩm." });
-    }
+    await newProduct.save();
+    res.status(201).json({ message: "Sản phẩm đã được thêm thành công!" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Đã xảy ra lỗi khi thêm sản phẩm." });
   }
-);
+});
 
 app.put("/api/update-product", upload.single("image"), async (req, res) => {
   try {

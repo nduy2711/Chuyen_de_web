@@ -13,11 +13,27 @@ export default function ProductList() {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/product/all");
+      const res = await fetch("http://localhost:5000/api/product/all", {
+        credentials: "include", // Gửi cookie JWT lên server
+      });
+
       const data = await res.json();
+      if (res.status === 401 || res.status === 403) {
+        window.location.href = "/login";
+        return;
+      }
+
+      if (!Array.isArray(data)) {
+        console.warn("Không lấy được danh sách sản phẩm:", data);
+        alert("Lỗi khi tải sản phẩm.");
+        setProducts([]);
+        return;
+      }
+
       setProducts(data);
     } catch (error) {
       console.error("Lỗi khi lấy danh sách sản phẩm:", error);
+      alert("Lỗi kết nối tới máy chủ.");
     }
   };
 

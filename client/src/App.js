@@ -20,6 +20,7 @@ export default function App() {
         <Route path="/add-necklace" element={<AddProduct />} />
         <Route path="/list-necklaces" element={<ProductList />} />
         <Route path="/search" element={<SearchProduct />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );

@@ -8,8 +8,8 @@ const AddProduct = () => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
 
-
   useEffect(() => {
+    checkAuth();
     fetch(`http://localhost:5000/api/product/last-id?category=${category}`)
       .then((res) => res.json())
       .then((data) => {
@@ -19,6 +19,22 @@ const AddProduct = () => {
         console.error("Lỗi khi lấy ID sản phẩm:", err);
       });
   }, [category]);
+
+  const checkAuth = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/verify", {
+        credentials: "include", // để gửi cookie JWT
+      });
+
+      if (res.status !== 200) {
+        window.location.href = "/login";
+      }
+    } catch (err) {
+      console.error("Lỗi xác thực:", err);
+      alert("Không thể xác thực người dùng.");
+      window.location.href = "/login";
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

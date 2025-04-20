@@ -10,6 +10,7 @@ import {
 import AddProduct from "./components/AddProduct";
 import ProductList from "./components/ProductList";
 import Login from "./components/Login";
+import { SearchProduct } from "./components/SearchProduct";
 
 export default function App() {
   return (
@@ -18,7 +19,7 @@ export default function App() {
       <Routes>
         <Route path="/add-necklace" element={<AddProduct />} />
         <Route path="/list-necklaces" element={<ProductList />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/search" element={<SearchProduct />} />
       </Routes>
     </Router>
   );
@@ -33,6 +34,9 @@ function Navbar() {
         </Link>
         <Link to="/list-necklaces" style={{ marginRight: "10px" }}>
           List Product
+        </Link>
+        <Link to="/search" style={{ marginRight: "10px" }}>
+          Search
         </Link>
         <Link to="/login" style={{ marginRight: "10px" }}>
           Login{" "}

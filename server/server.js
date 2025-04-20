@@ -227,5 +227,17 @@ app.post("/api/admin/logout", (req, res) => {
   res.clearCookie("token");
   res.json({ message: "Đã đăng xuất thành công" });
 });
+app.post("/api/product/search", async (req, res) => {
+  const keyword = req.body.keyword;
+  try {
+    const results = await Necklace.find({
+      name: { $regex: keyword, $options: "i" },
+    });
+    res.json(results);
+  } catch (error) {
+    console.error("Lỗi server khi tìm kiếm:", error);
+    res.status(500).json({ error: "Lỗi server khi tìm kiếm" });
+  }
+});
 
 app.listen(port, () => console.log(`Server đang chạy trên cổng ${port}!`));

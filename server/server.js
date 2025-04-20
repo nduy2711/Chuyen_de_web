@@ -95,31 +95,17 @@ app.post("/api/product/add", upload.single("image"), async (req, res) => {
   }
 });
 
-app.get("/api/list-product", async (req, res) => {
-  try {
-    const products = await Necklace.find();
-    res.status(200).json(products);
-  } catch (error) {
-    console.error("Lỗi khi lấy danh sách sản phẩm:", error);
-    res.status(500).json({ message: "Lỗi server khi lấy danh sách sản phẩm" });
-  }
-});
-
 app.put("/api/update-product", upload.single("image"), async (req, res) => {
   try {
     const { id, name, description, price, status } = req.body;
+    let imagePath = req.body.oldImage || "";
 
-    // Sử dụng oldImage nếu không có ảnh mới
-    let imagePath = req.body.oldImage || ""; // Đảm bảo rằng nếu không có ảnh mới, giữ lại ảnh cũ.
-
-    // Kiểm tra nếu có ảnh mới thì cập nhật ảnh
     if (req.file) {
       imagePath = "/uploads/images/" + req.file.filename;
     }
 
-    // Tìm và cập nhật sản phẩm
     const updatedProduct = await Necklace.findOneAndUpdate(
-      { id }, // Nếu id là chuỗi, bạn có thể dùng ObjectId nếu cần
+      { id },
       {
         name,
         description,
@@ -141,6 +127,105 @@ app.put("/api/update-product", upload.single("image"), async (req, res) => {
     console.error("Lỗi khi cập nhật sản phẩm:", error);
     res.status(500).json({ message: "Lỗi server khi cập nhật sản phẩm" });
   }
+});
+
+app.get("/api/product/all", async (req, res) => {
+  try {
+    const products = await Necklace.find({});
+    res.json(products);
+  } catch (err) {
+    console.error("Lỗi khi lấy danh sách sản phẩm:", err);
+    res.status(500).json({ error: "Lỗi server khi lấy sản phẩm" });
+  }
+});
+
+// Route DELETE: Xóa sản phẩm theo id
+app.delete("/api/product/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log("ID nhận được từ frontend:", id);
+  try {
+    const deletedProduct = await Necklace.findOneAndDelete({ id });
+
+    if (!deletedProduct) {
+      return res
+        .status(404)
+        .json({ message: "Không tìm thấy sản phẩm để xóa." });
+    }
+
+    res.status(200).json({ message: "Đã xóa sản phẩm thành công." });
+  } catch (error) {
+    console.error("Lỗi khi xóa sản phẩm:", error);
+    res.status(500).json({ message: "Lỗi server khi xóa sản phẩm." });
+  }
+});
+
+const bcrypt = require("bcrypt");
+const JWT_SECRET = "secret_key_very_secret"; // nên để vào biến môi trường khi deploy
+
+const adminSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+});
+
+const Admin = mongoose.model("Admin", adminSchema, "Admins");
+
+module.exports = Admin;
+
+app.post("/api/admin/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const admin = await Admin.findOne({ username });
+    if (!admin) {
+      return res.status(400).json({ message: "Sai tài khoản hoặc mật khẩu" });
+    }
+
+    const isMatch = await bcrypt.compare(password, admin.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Sai tài khoản hoặc mật khẩu" });
+    }
+
+    const token = jwt.sign({ username: admin.username }, JWT_SECRET, {
+      expiresIn: "2h",
+    });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "Lax",
+      secure: false,
+      maxAge: 2 * 60 * 60 * 1000,
+    });
+
+    res.json({ message: "Đăng nhập thành công", username: admin.username });
+  } catch (err) {
+    console.error("Lỗi đăng nhập:", err);
+    res.status(500).json({ message: "Lỗi server khi đăng nhập" });
+  }
+});
+
+function verifyToken(req, res, next) {
+  const token = req.cookies.token;
+  if (!token) return res.status(401).json({ message: "Chưa đăng nhập" });
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.status(403).json({ message: "Token không hợp lệ" });
+  }
+}
+
+app.post("/api/admin/logout", (req, res) => {
+  res.clearCookie("token");
+  res.json({ message: "Đã đăng xuất thành công" });
 });
 
 app.listen(port, () => console.log(`Server đang chạy trên cổng ${port}!`));

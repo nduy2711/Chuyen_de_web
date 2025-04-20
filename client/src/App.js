@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Navigate,
+} from "react-router-dom";
 import AddProduct from "./components/AddProduct";
-import UpdateProduct from "./components/UpdateProduct";
+import ProductList from "./components/ProductList";
+import Login from "./components/Login";
 
 export default function App() {
   return (
@@ -10,7 +17,8 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/add-necklace" element={<AddProduct />} />
-        <Route path="/update-necklace" element={<UpdateProduct />} />
+        <Route path="/list-necklaces" element={<ProductList />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
@@ -23,11 +31,8 @@ function Navbar() {
         <Link to="/add-necklace" style={{ marginRight: "10px" }}>
           Add{" "}
         </Link>
-        <Link to="/update-necklace" style={{ marginRight: "10px" }}>
-          Update{" "}
-        </Link>
-        <Link to="/delete-necklace" style={{ marginRight: "10px" }}>
-          Delete{" "}
+        <Link to="/list-necklaces" style={{ marginRight: "10px" }}>
+          List Product
         </Link>
         <Link to="/login" style={{ marginRight: "10px" }}>
           Login{" "}

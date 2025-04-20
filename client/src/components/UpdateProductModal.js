@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 
-function UpdateProductModal({ show, onClose, product, onUpdated }) {
+function UpdateProductModal({ show, onClose, product, fetchProducts }) {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -65,7 +65,7 @@ function UpdateProductModal({ show, onClose, product, onUpdated }) {
       const result = await response.json();
       if (response.ok) {
         alert("Cập nhật thành công!");
-        onUpdated();
+        fetchProducts();
         onClose();
       } else {
         alert("Cập nhật thất bại: " + result.message);
@@ -80,11 +80,14 @@ function UpdateProductModal({ show, onClose, product, onUpdated }) {
     <Modal show={show} onHide={onClose}>
       <Modal.Header closeButton>
         <h2>Cập nhật sản phẩm</h2>
+        <br />
       </Modal.Header>
+
       <Modal.Body>
         <form className="update-form">
           <div className="form-group">
             <label>Mã sản phẩm</label>
+            <br />
             <input
               type="text"
               readOnly
@@ -94,6 +97,7 @@ function UpdateProductModal({ show, onClose, product, onUpdated }) {
           </div>
           <div className="form-group">
             <label>Tên sản phẩm</label>
+            <br />
             <input
               type="text"
               name="name"
@@ -104,6 +108,7 @@ function UpdateProductModal({ show, onClose, product, onUpdated }) {
           </div>
           <div className="form-group">
             <label>Mô tả</label>
+            <br />
             <textarea
               name="description"
               value={formData.description}
@@ -113,6 +118,7 @@ function UpdateProductModal({ show, onClose, product, onUpdated }) {
           </div>
           <div className="form-group">
             <label>Giá</label>
+            <br />
             <input
               type="number"
               name="price"
@@ -123,6 +129,7 @@ function UpdateProductModal({ show, onClose, product, onUpdated }) {
           </div>
           <div className="form-group">
             <label>Trạng thái</label>
+            <br />
             <select
               name="status"
               value={formData.status}
@@ -135,6 +142,7 @@ function UpdateProductModal({ show, onClose, product, onUpdated }) {
           </div>
           <div className="form-group">
             <label>Hình ảnh</label>
+            <br />
             <input
               type="file"
               onChange={handleImageChange}
@@ -145,8 +153,8 @@ function UpdateProductModal({ show, onClose, product, onUpdated }) {
                 src={previewImg}
                 alt="Preview"
                 style={{
-                  width: "100%",
-                  maxHeight: "200px",
+                  width: "150px",
+                  maxHeight: "auto",
                   objectFit: "cover",
                   marginTop: "10px",
                   borderRadius: "5px",

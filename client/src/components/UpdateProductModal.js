@@ -43,6 +43,11 @@ function UpdateProductModal({ show, onClose, product, fetchProducts }) {
   };
 
   const handleSubmit = async () => {
+    const isConfirmed = window.confirm(
+      "Bạn có chắc chắn muốn cập nhật sản phẩm này?"
+    );
+    if (!isConfirmed) return;
+
     const data = new FormData();
     data.append("id", product.id);
     data.append("name", formData.name);

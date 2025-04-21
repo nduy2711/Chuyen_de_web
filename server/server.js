@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const app = express();
 const port = 5000;
 
-app.use(cors({ credentials: true, origin: "https://chuyen-de-web-fawn.vercel.app" }));
+app.use(cors({ credentials: true, origin: "https://chuyen-de-web-ten.vercel.app" }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

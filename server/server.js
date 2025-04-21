@@ -197,8 +197,8 @@ app.post("/api/admin/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      sameSite: "Lax",
-      secure: false,
+      sameSite: "None",
+      secure: true,
       maxAge: 2 * 60 * 60 * 1000,
     });
 

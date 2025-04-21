@@ -11,7 +11,7 @@ const AddProduct = () => {
 
   useEffect(() => {
     checkAuth();
-    fetch(`http://localhost:5000/api/product/last-id?category=${category}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/product/last-id?category=${category}`)
       .then((res) => res.json())
       .then((data) => {
         setGeneratedId(data.id);
@@ -23,7 +23,7 @@ const AddProduct = () => {
 
   const checkAuth = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/auth/verify", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/verify`, {
         credentials: "include", // để gửi cookie JWT
       });
 
@@ -49,7 +49,7 @@ const AddProduct = () => {
     formData.append("image", image);
 
     try {
-      const response = await fetch("http://localhost:5000/api/product/add", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/product/add`, {
         method: "POST",
         body: formData,
       });

@@ -22,7 +22,7 @@ export default function ProductList() {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/product/all", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/product/all`, {
         credentials: "include",
       });
 
@@ -113,7 +113,7 @@ export default function ProductList() {
             <Card>
               <Card.Img
                 variant="top"
-                src={`http://localhost:5000${product.image}`}
+                src={`${process.env.REACT_APP_API_URL}${product.image}`}
                 style={{ height: "200px", objectFit: "cover" }}
               />
               <Card.Body>

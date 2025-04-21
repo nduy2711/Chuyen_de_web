@@ -11,7 +11,7 @@ export function SearchProduct() {
 
   const checkAuth = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/auth/verify", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/verify`, {
         credentials: "include",
       });
 
@@ -27,7 +27,7 @@ export function SearchProduct() {
 
   const handleSearch = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/product/search", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/product/search`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,7 +72,7 @@ export function SearchProduct() {
               <Card>
                 <Card.Img
                   variant="top"
-                  src={`http://localhost:5000${product.image}`}
+                  src={`${process.env.REACT_APP_API_URL}${product.image}`}
                   style={{ height: "200px", objectFit: "cover" }}
                 />
                 <Card.Body>

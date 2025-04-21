@@ -20,7 +20,7 @@ function UpdateProductModal({ show, onClose, product, fetchProducts }) {
         status: product.status,
       });
       setPreviewImg(
-        product.image ? `http://localhost:5000${product.image}` : null
+        product.image ? `${process.env.REACT_APP_API_URL}${product.image}` : null
       );
       setImageFile(null);
     }
@@ -62,7 +62,7 @@ function UpdateProductModal({ show, onClose, product, fetchProducts }) {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/update-product", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/update-product`, {
         method: "PUT",
         body: data,
       });

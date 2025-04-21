@@ -7,7 +7,7 @@ export default function DeleteProduct({ productId, onDelete }) {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/product/delete/${productId}`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/product/delete/${productId}`, {
         method: "DELETE",
       });
       if (res.ok) {

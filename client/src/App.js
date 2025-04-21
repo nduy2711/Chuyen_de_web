@@ -14,6 +14,7 @@ export default function App() {
       <AppNavbar />
       <Container className="mt-4">
         <Routes>
+          <Route path="/" element={<h2>Welcome to Necklace App!</h2>} />
           <Route path="/add-necklace" element={<AddProduct />} />
           <Route path="/list-necklaces" element={<ProductList />} />
           <Route path="/search" element={<SearchProduct />} />

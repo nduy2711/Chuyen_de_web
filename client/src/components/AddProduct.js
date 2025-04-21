@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
 const AddProduct = () => {
   const [category, setCategory] = useState("Gold");
@@ -66,43 +67,76 @@ const AddProduct = () => {
   };
 
   return (
-    <form className="add-product-container" onSubmit={handleSubmit}>
-      <h1>Add Product</h1>
-      <input type="text" value={generatedId} readOnly />
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
-        <option value="Gold">Gold</option>
-        <option value="Silver">Silver</option>
-        <option value="Bronze">Bronze</option>
-      </select>
-      <input
-        type="text"
-        placeholder="Product Name"
-        required
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        type="number"
-        placeholder="Product Price"
-        required
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Product Description"
-        required
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <input
-        type="file"
-        accept="image/*"
-        required
-        onChange={(e) => setImage(e.target.files[0])}
-      />
-      <button type="submit">Add Product</button>
-    </form>
+    <Container className="mt-4">
+      <Row className="justify-content-center">
+        <Col md={6}>
+          <h1 className="text-center">Thêm sản phẩm</h1>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Product ID</Form.Label>
+              <Form.Control type="text" value={generatedId} readOnly />
+            </Form.Group>
+            
+            <Form.Group className="mb-3">
+              <Form.Label>Category</Form.Label>
+              <Form.Select value={category} onChange={(e) => setCategory(e.target.value)}>
+                <option value="Gold">Gold</option>
+                <option value="Silver">Silver</option>
+                <option value="Bronze">Bronze</option>
+              </Form.Select>
+            </Form.Group>
+            
+            <Form.Group className="mb-3">
+              <Form.Label>Product Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter product name"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Form.Group>
+            
+            <Form.Group className="mb-3">
+              <Form.Label>Product Price</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter product price"
+                required
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </Form.Group>
+            
+            <Form.Group className="mb-3">
+              <Form.Label>Product Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                placeholder="Enter product description"
+                rows={3}
+                required
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </Form.Group>
+            
+            <Form.Group className="mb-3">
+              <Form.Label>Product Image</Form.Label>
+              <Form.Control
+                type="file"
+                accept="image/*"
+                required
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </Form.Group>
+            
+            <Button variant="primary" type="submit" className="w-100">
+              Add Product
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

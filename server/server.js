@@ -63,7 +63,6 @@ app.get("/api/product/last-id", async (req, res) => {
       const lastNumber = parseInt(latest.id.slice(-3));
       newNumber = lastNumber + 1;
     }
-
     const newId = `NL${prefix}${String(newNumber).padStart(3, "0")}`;
     res.json({ id: newId });
   } catch (err) {

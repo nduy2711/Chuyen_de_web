@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 
 export default function DeleteProduct({ productId, onDelete }) {
   const handleDelete = async () => {
@@ -20,5 +21,9 @@ export default function DeleteProduct({ productId, onDelete }) {
     }
   };
 
-  return <button onClick={handleDelete}>Delete</button>;
+  return (
+    <Button variant="danger" size="sm" onClick={handleDelete}>
+      Xóa
+    </Button>
+  );
 }

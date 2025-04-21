@@ -28,7 +28,7 @@ function AppNavbar() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand as={Link} to="/list-necklaces">
+        <Navbar.Brand as={Link} to="/">
           NECKLACE
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="main-navbar-nav" />

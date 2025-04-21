@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import DeleteProduct from "./DeleteProduct";
 import UpdateProductModal from "./UpdateProductModal";
 
@@ -14,17 +15,17 @@ export default function ProductList() {
   const fetchProducts = async () => {
     try {
       const res = await fetch("http://localhost:5000/api/product/all", {
-        credentials: "include", // Gửi cookie JWT lên server
+        credentials: "include",
       });
 
       const data = await res.json();
+
       if (res.status === 401 || res.status === 403) {
         window.location.href = "/login";
         return;
       }
 
       if (!Array.isArray(data)) {
-        console.warn("Không lấy được danh sách sản phẩm:", data);
         alert("Lỗi khi tải sản phẩm.");
         setProducts([]);
         return;
@@ -52,54 +53,40 @@ export default function ProductList() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "20px",
-        padding: "20px",
-        justifyContent: "center",
-      }}
-    >
-      {products.map((product) => (
-        <div
-          key={product.id}
-          style={{
-            border: "1px solid #ccc",
-            borderRadius: "10px",
-            padding: "15px",
-            width: "250px",
-          }}
-        >
-          <img
-            src={`http://localhost:5000${product.image}`}
-            alt={product.name}
-            style={{
-              width: "100%",
-              height: "180px",
-              objectFit: "cover",
-              borderRadius: "5px",
-            }}
-          />
-          <h3>{product.name}</h3>
-          <p>
-            <strong>ID:</strong> {product.id}
-          </p>
-          <p>
-            <strong>Giá:</strong> {product.price} VND
-          </p>
-          <button
-            onClick={() => handleOpenModal(product)}
-            style={{ marginRight: "10px" }}
-          >
-            Update
-          </button>
-          <DeleteProduct
-            productId={product.id}
-            onDelete={handleProductDeleted}
-          />
-        </div>
-      ))}
+    <Container className="py-4">
+      <Row className="g-4">
+        {products.map((product) => (
+          <Col key={product.id} xs={12} sm={6} md={4} lg={3}>
+            <Card>
+              <Card.Img
+                variant="top"
+                src={`http://localhost:5000${product.image}`}
+                style={{ height: "200px", objectFit: "cover" }}
+              />
+              <Card.Body>
+                <Card.Title>{product.name}</Card.Title>
+                <Card.Text>
+                  <strong>ID:</strong> {product.id}
+                  <br />
+                  <strong>Giá:</strong> {product.price} VND
+                </Card.Text>
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={() => handleOpenModal(product)}
+                  className="me-2"
+                >
+                  Cập nhật
+                </Button>
+                <DeleteProduct
+                  productId={product.id}
+                  onDelete={handleProductDeleted}
+                />
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
 
       {selectedProduct && (
         <UpdateProductModal
@@ -109,6 +96,6 @@ export default function ProductList() {
           fetchProducts={fetchProducts}
         />
       )}
-    </div>
+    </Container>
   );
 }

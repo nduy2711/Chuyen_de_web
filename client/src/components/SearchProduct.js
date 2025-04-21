@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Container, Row, Col, Form, Button, Card, Alert } from "react-bootstrap";
 
 export function SearchProduct() {
   const [query, setQuery] = useState("");
@@ -11,7 +12,7 @@ export function SearchProduct() {
   const checkAuth = async () => {
     try {
       const res = await fetch("http://localhost:5000/api/auth/verify", {
-        credentials: "include", // để gửi cookie JWT
+        credentials: "include",
       });
 
       if (res.status !== 200) {
@@ -42,29 +43,47 @@ export function SearchProduct() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Tìm kiếm sản phẩm</h2>
-      <input
-        type="text"
-        placeholder="Nhập tên sản phẩm..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button onClick={handleSearch}>Tìm kiếm</button>
+    <Container className="mt-4">
+      <h2 className="text-center mb-4">Tìm kiếm sản phẩm</h2>
+      <Row className="justify-content-center mb-3">
+        <Col md={6}>
+          <Form.Control
+            type="text"
+            placeholder="Nhập tên sản phẩm..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </Col>
+        <Col md="auto">
+          <Button variant="primary" onClick={handleSearch}>
+            Tìm kiếm
+          </Button>
+        </Col>
+      </Row>
 
-      <div style={{ marginTop: "20px" }}>
-        {results.map((product) => (
-          <div key={product._id}>
-            <h4>{product.name}</h4>
-            <img
-              src={`http://localhost:5000${product.image}`}
-              alt={product.name}
-              width={120}
-            />
-            <p>Giá: {product.price} VND</p>
-          </div>
-        ))}
-      </div>
-    </div>
+      <Row>
+        {results.length === 0 ? (
+          <Col className="text-center">
+            <Alert variant="info">Không có kết quả nào</Alert>
+          </Col>
+        ) : (
+          results.map((product) => (
+            <Col key={product._id} md={4} className="mb-4">
+              <Card>
+                <Card.Img
+                  variant="top"
+                  src={`http://localhost:5000${product.image}`}
+                  style={{ height: "200px", objectFit: "cover" }}
+                />
+                <Card.Body>
+                  <Card.Title>{product.name}</Card.Title>
+                  <Card.Text>Giá: {product.price} VND</Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))
+        )}
+      </Row>
+    </Container>
   );
 }

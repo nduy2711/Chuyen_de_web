@@ -158,7 +158,7 @@ app.delete("/api/product/delete/:id", async (req, res) => {
   }
 });
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const JWT_SECRET = "secret_key_very_secret"; // nên để vào biến môi trường khi deploy
 
 const adminSchema = new mongoose.Schema({
